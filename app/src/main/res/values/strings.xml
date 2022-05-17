@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CHatApp</string>
+    <string name="ok">OK</string>
+    <string name="phone_number_7">Phone number +7...</string>
+    <string name="enter_code_here">enter code here</string>
+    <string name="enter_code_here2">Enter code here</string>
+    <string name="send_code">send code</string>
 </resources>

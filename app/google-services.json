@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "52511486802-s3htaf7aam6t6p5d16d468jhee27mi13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lost.chatapp",
+            "certificate_hash": "53f472b99ff19b1596d7788971d062e252c21263"
+          }
+        },
+        {
           "client_id": "52511486802-fr8cm9q97e792ng8l5mo69tcofa91dgc.apps.googleusercontent.com",
           "client_type": 3
         }
