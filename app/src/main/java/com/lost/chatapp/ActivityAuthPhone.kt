@@ -66,7 +66,7 @@ class ActivityAuthPhone: AppCompatActivity() {
 
         binding.btnOk.setOnClickListener(View.OnClickListener {
             val otpCode = binding.etCode.text.toString().trim()
-            if(otpCode.isNotEmpty()){
+            if(!otpCode.isEmpty()){
                 val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
                     storedVerificationID, otpCode)
                 signInWithPhoneAuthCredential(credential)
