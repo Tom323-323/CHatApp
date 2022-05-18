@@ -1,6 +1,5 @@
 package com.lost.chatapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.*
 import com.lost.chatapp.databinding.ActivityAuthPhoneBinding
 import java.util.concurrent.TimeUnit
 
@@ -29,7 +25,7 @@ class ActivityAuthPhone: AppCompatActivity() {
         binding = ActivityAuthPhoneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance() //Init
 
 
         // Chek the current user
@@ -65,6 +61,38 @@ class ActivityAuthPhone: AppCompatActivity() {
 
         }
 
+
+        // Verification__________________________________________
+
+        binding.btnOk.setOnClickListener(View.OnClickListener {
+            val otpCode = binding.etCode.text.toString().trim()
+            if(otpCode.isNotEmpty()){
+                val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                    storedVerificationID, otpCode)
+                signInWithPhoneAuthCredential(credential)
+            } else{
+                Toast.makeText(applicationContext,"Idiot! Enter CODE!", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
+
+    }
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential).addOnCompleteListener(this){ task ->
+            if(task.isSuccessful){
+                //If code is done
+                startActivity(Intent(applicationContext,MainActivity::class.java))
+                finish()
+            } else{
+                // If code is wrong
+                if(task.exception is FirebaseAuthInvalidCredentialsException){
+                    Toast.makeText(this,"WRONG CODE !!!", Toast.LENGTH_LONG).show()
+                }
+            }
+
+        }
     }
 
     // Send phone number
