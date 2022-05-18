@@ -3,10 +3,13 @@ package com.lost.chatapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.lost.chatapp.databinding.ActivityAuthPhoneBinding
@@ -40,11 +43,33 @@ class ActivityAuthPhone: AppCompatActivity() {
             login()
         })
 
+        //Callback function
+        callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+            override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+                startActivity(Intent(applicationContext,MainActivity::class.java))
+                finish()
+            }
+
+            override fun onVerificationFailed(p0: FirebaseException) {
+                Toast.makeText(applicationContext, "Failed verification!", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken)
+            {
+                Log.e("AAA", verificationId)
+                storedVerificationID = verificationId
+                resendToken = token
+            }
+
+        }
 
     }
 
+    // Send phone number
     private fun login() {
-        var phoneNumber = binding.etPhoneNumber.text.toString().trim()
+        val phoneNumber = binding.etPhoneNumber.text.toString().trim()
         if(phoneNumber.isNotEmpty()){
             sendVerificationCode(phoneNumber)
         } else {
