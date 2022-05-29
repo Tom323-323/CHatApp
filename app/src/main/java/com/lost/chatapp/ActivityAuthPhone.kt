@@ -60,8 +60,6 @@ class ActivityAuthPhone: AppCompatActivity() {
             }
 
         }
-
-
         // Verification__________________________________________
 
         binding.btnOk.setOnClickListener(View.OnClickListener {
@@ -73,10 +71,7 @@ class ActivityAuthPhone: AppCompatActivity() {
             } else{
                 Toast.makeText(applicationContext,"Idiot! Enter CODE!", Toast.LENGTH_LONG).show()
             }
-
         })
-
-
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -91,7 +86,6 @@ class ActivityAuthPhone: AppCompatActivity() {
                     Toast.makeText(this,"WRONG CODE !!!", Toast.LENGTH_LONG).show()
                 }
             }
-
         }
     }
 
@@ -101,7 +95,7 @@ class ActivityAuthPhone: AppCompatActivity() {
         if(phoneNumber.isNotEmpty()){
             sendVerificationCode(phoneNumber)
         } else {
-            Toast.makeText(applicationContext, "YOu are idiot!!! Enter mobile number!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "You are idiot!!! Enter mobile number!", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -114,6 +108,4 @@ class ActivityAuthPhone: AppCompatActivity() {
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
-
-
 }
