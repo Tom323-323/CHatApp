@@ -93,6 +93,7 @@ class ActivityAuthPhone: AppCompatActivity() {
     private fun login() {
         val phoneNumber = binding.etPhoneNumber.text.toString().trim()
         if(phoneNumber.isNotEmpty()){
+            val phoneNumber= "+7$phoneNumber"
             sendVerificationCode(phoneNumber)
         } else {
             Toast.makeText(applicationContext, "You are idiot!!! Enter mobile number!", Toast.LENGTH_LONG).show()
