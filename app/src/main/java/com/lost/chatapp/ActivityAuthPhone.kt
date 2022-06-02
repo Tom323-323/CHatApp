@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.lost.chatapp.databinding.ActivityAuthPhoneBinding
+import com.lost.chatapp.exten.makeToast
 import java.util.concurrent.TimeUnit
 
 class ActivityAuthPhone: AppCompatActivity() {
@@ -26,7 +27,6 @@ class ActivityAuthPhone: AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance() //Init
-
 
         // Chek the current user
         val currentUser = auth.currentUser
@@ -47,7 +47,7 @@ class ActivityAuthPhone: AppCompatActivity() {
             }
 
             override fun onVerificationFailed(p0: FirebaseException) {
-                Toast.makeText(applicationContext, "Failed verification!", Toast.LENGTH_LONG).show()
+                makeToast("Failed verification!")
             }
 
             override fun onCodeSent(
@@ -58,7 +58,6 @@ class ActivityAuthPhone: AppCompatActivity() {
                 storedVerificationID = verificationId
                 resendToken = token
             }
-
         }
         // Verification__________________________________________
 
@@ -69,7 +68,7 @@ class ActivityAuthPhone: AppCompatActivity() {
                     storedVerificationID, otpCode)
                 signInWithPhoneAuthCredential(credential)
             } else{
-                Toast.makeText(applicationContext,"Idiot! Enter CODE!", Toast.LENGTH_LONG).show()
+                makeToast("Idiot! Enter CODE!")
             }
         })
     }
@@ -83,7 +82,7 @@ class ActivityAuthPhone: AppCompatActivity() {
             } else{
                 // If code is wrong
                 if(task.exception is FirebaseAuthInvalidCredentialsException){
-                    Toast.makeText(this,"WRONG CODE !!!", Toast.LENGTH_LONG).show()
+                    makeToast("Wrong code!!!")
                 }
             }
         }
@@ -93,10 +92,9 @@ class ActivityAuthPhone: AppCompatActivity() {
     private fun login() {
         val phoneNumber = binding.etPhoneNumber.text.toString().trim()
         if(phoneNumber.isNotEmpty()){
-            val phoneNumber= "+7$phoneNumber"
-            sendVerificationCode(phoneNumber)
+            sendVerificationCode("+7$phoneNumber")
         } else {
-            Toast.makeText(applicationContext, "You are idiot!!! Enter mobile number!", Toast.LENGTH_LONG).show()
+            makeToast("You are idiot!!! Enter mobile number!")
         }
     }
 

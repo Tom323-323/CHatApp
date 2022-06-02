@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CHatApp/app/src/main/res/layout/activity_auth_google.xml" value="0.365625" />
         <entry key="..\:/CHatApp/app/src/main/res/layout/activity_auth_phone.xml" value="0.365625" />
         <entry key="..\:/CHatApp/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/CHatApp/app/src/main/res/layout/activity_start_select.xml" value="0.365625" />
       </map>
     </option>
   </component>

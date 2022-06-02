@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("AAA","MainActivity:fun Canceled")
             }
-
         })
     }
 }
